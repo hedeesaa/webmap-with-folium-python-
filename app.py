@@ -1,6 +1,16 @@
 import folium
 import pandas
 
+
+def color_height(elev):
+    if elev < 1000:
+        return 'green'
+    elif 1000 <= elev < 3000:
+        return 'orange'
+    else:
+        return 'red'
+
+
 map = folium.Map(location=[39, -100], zoom_start=5)
 
 fg = folium.FeatureGroup(name="My Map")
@@ -23,7 +33,7 @@ for nme, lt, ln, el in zip(name, lat, lon, elev):
         nme, str(el), nme, "More information"), width=200, height=100)
 
     fg.add_child(folium.Marker(location=[
-        lt, ln], popup=folium.Popup(iframe), icon=folium.Icon(color='red')))
+        lt, ln], popup=folium.Popup(iframe), icon=folium.Icon(color=color_height(el))))
 
 map.add_child(fg)
 map.save("index.html")
