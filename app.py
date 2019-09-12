@@ -32,8 +32,8 @@ for nme, lt, ln, el in zip(name, lat, lon, elev):
     iframe = folium.IFrame(html=html % (
         nme, str(el), nme, "More information"), width=200, height=100)
 
-    fg.add_child(folium.Marker(location=[
-        lt, ln], popup=folium.Popup(iframe), icon=folium.Icon(color=color_height(el))))
+    fg.add_child(folium.CircleMarker(
+        location=[lt, ln], radius=7, popup=folium.Popup(iframe), fill_color=color_height(el), color=color_height(el), fill_opacity=0.7))
 
 map.add_child(fg)
 map.save("index.html")
